@@ -17,7 +17,7 @@ export const javascript = {
         'Which of the following are JavaScript data types? (Select all that apply)',
       choices: ['String', 'Number', 'Function', 'Array'],
       type: 'MAQs',
-      correctAnswers: ['String', 'Number', 'Array'],
+      correctAnswers: ['String'],
       score: 10,
     },
     {

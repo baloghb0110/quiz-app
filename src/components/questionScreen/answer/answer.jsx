@@ -23,6 +23,22 @@ const AnswerStyle = styled.div`
   @media ${device.md} {
     font-weight: 500;
   }
+
+  // if user answer matches to correct answer make answer background success color otherwise danger color
+  ${({ correct }) =>
+    correct &&
+    css`
+      border: 1px solid ${({ theme }) => theme.colors.success};
+      background-color: ${({ theme }) => theme.colors.successLight};
+    `}
+
+  ${({ wrong }) =>
+    wrong &&
+    css`
+      border: 1px solid ${({ theme }) => theme.colors.danger};
+      background-color: ${({ theme }) => theme.colors.dangerLight};
+    `}
+
   input {
     visibility: hidden;
     margin: 0;
@@ -40,19 +56,19 @@ const AnswerLabel = styled.label`
 
 const ChoiceLabel = styled.span``
 
-const Answer = ({ onChange, index, choice, type, selectedAnswer }) => {
+const Answer = ({ onChange, index, choice, type, sAnswer, correct, wrong }) => {
   // Convert index to alphabet character to show ABCD before question
   const label = String.fromCharCode(65 + index)
 
   return (
-    <AnswerStyle key={index} highlightAnswer={selectedAnswer.includes(choice)}>
+    <AnswerStyle key={index} correct={correct} wrong={wrong} highlightAnswer={sAnswer.includes(choice)}>
       <AnswerLabel>
         <ChoiceLabel>{label}.</ChoiceLabel>
         <input
           name={choice}
           // radio is for checked one option and checkbox is for checked multiple options
           type={type === 'MAQs' ? 'checkbox' : 'radio'}
-          checked={selectedAnswer.includes(choice)}
+          checked={sAnswer.includes(choice)}
           onChange={onChange}
         />
         {choice}

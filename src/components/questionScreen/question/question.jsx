@@ -32,29 +32,60 @@ const QuestionStyle = styled.h2`
 
 const Question = ({
   question,
-  code,
-  image,
   type,
   choices,
-  selectedAnswer,
+  needCheck,
+  sAnswer,
   handleAnswerSelection,
-}) => {
+  gAnswer,
+  }) => {
+
   return (
     <>
     <QuestionContainer>
       <QuestionStyle>{question}</QuestionStyle>
 
       <AnswersContainer>
-        {choices.map((choice, index) => (
-          <Answer
-            choice={choice}
-            index={index}
-            key={index}
-            onChange={(e) => handleAnswerSelection(e, index)}
-            type={type}
-            selectedAnswer={selectedAnswer}
-          />
-        ))}
+        {needCheck && choices.map((choice, index) => {
+          let wrong = true;
+          if(gAnswer.includes(sAnswer)){
+            wrong = false
+          }
+          return (
+            <Answer
+              choice={choice}
+              index={index}
+              key={index}
+              onChange={(e) => handleAnswerSelection(e, index)}
+              type={type}
+              sAnswer={sAnswer}
+              correct={choice.includes(gAnswer)}
+              wrong={wrong && !choice.includes(gAnswer) && choice.includes(sAnswer)}
+            />
+          )         
+        })}
+
+        {
+        
+        }
+
+        {!needCheck && choices.map((choice, index) => {
+          const correct = needCheck && sAnswer.includes(choice) && gAnswer.includes(choice)
+          const wrong = needCheck && sAnswer.includes(choice) && !gAnswer.includes(choice)
+
+          return (
+            <Answer
+              choice={choice}
+              index={index}
+              key={index}
+              onChange={(e) => handleAnswerSelection(e, index)}
+              type={type}
+              sAnswer={sAnswer}
+              correct={correct}
+              wrong={wrong}
+            />
+          )
+        })}        
       </AnswersContainer>
     </QuestionContainer>
     </>

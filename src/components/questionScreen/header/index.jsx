@@ -8,7 +8,6 @@ import { HighlightedText } from '../../../style/Global'
 
 const ResultOverviewStyle = styled.div`
   text-align: center;
-  margin-bottom: 70px;
   justify-content: center;
   @media ${device.md} {
     margin-bottom: 30px;

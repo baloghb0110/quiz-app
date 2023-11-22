@@ -20,7 +20,6 @@ const QuizContainer = styled.div`
   background: ${({ theme }) => theme.colors.cardBackground};
   border-radius: 4px;
   padding: 30px 60px 80px 60px;
-  margin-bottom: 70px;
   position: relative;
   @media ${device.md} {
     width: 100%;
@@ -70,20 +69,20 @@ const QuestionScreen = () => {
     if(!checkedd){
       const { name, checked } = e.target
         if (checked) {
-          setSelectedAnswer([name])
+          setSelectedAnswer(name)
         }
     }
   }
 
   const onClickNext = () => {
     setChecked(false)
+    setSelectedAnswer([])
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1)
     }else{
       setActiveQuestion(0)
       restartQuiz()
     }
-    setSelectedAnswer([])
   }
 
   const onClickCheck = () => {
@@ -103,11 +102,7 @@ const QuestionScreen = () => {
 
   return (
     <PageCenter>
-      <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
-        { checkedd && <QuizHeader
-          answer={selectedAnswer}
-          goodanswer={correctAnswers}
-        />}
+      <QuizContainer $selectedAnswer={selectedAnswer.length > 0}>
         <Question
             question={question}
             code={code}
@@ -115,7 +110,9 @@ const QuestionScreen = () => {
             choices={choices}
             type={type}
             handleAnswerSelection={handleAnswerSelection}
-            selectedAnswer={selectedAnswer}
+            needCheck={checkedd}
+            sAnswer={selectedAnswer}
+            gAnswer={correctAnswers}
           />
 
         <ButtonWrapper>
