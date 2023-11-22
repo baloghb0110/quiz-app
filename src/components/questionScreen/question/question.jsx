@@ -42,21 +42,21 @@ const Question = ({
   return (
     <>
     <QuestionContainer>
-          <QuestionStyle>{question}</QuestionStyle>
-          {/* if question contains code snippet then show code */}
-          <AnswersContainer>
-            {choices.map((choice, index) => (
-              <Answer
-                choice={choice}
-                index={index}
-                key={index}
-                onChange={(e) => handleAnswerSelection(e, index)}
-                type={type}
-                selectedanswer={selectedAnswer}
-              />
-            ))}
-          </AnswersContainer>
-        </QuestionContainer>
+      <QuestionStyle>{question}</QuestionStyle>
+
+      <AnswersContainer>
+        {choices.map((choice, index) => (
+          <Answer
+            choice={choice}
+            index={index}
+            key={index}
+            onChange={(e) => handleAnswerSelection(e, index)}
+            type={type}
+            selectedAnswer={selectedAnswer}
+          />
+        ))}
+      </AnswersContainer>
+    </QuestionContainer>
     </>
   )
 }

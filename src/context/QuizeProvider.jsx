@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { QuizContext } from './QuizeContext';
+import { quiz } from '../data/QuizQuestions';
 
 // eslint-disable-next-line react/prop-types
 const QuizProvider = ({ children }) => {
   const initialState = {
-    quizTopic: 'React',
+    quizTopic: 'Word',
     result: [],
     currentScreen: 'SplashScreen',
   };
@@ -14,7 +15,7 @@ const QuizProvider = ({ children }) => {
   const [result, setResult] = useState(initialState.result);
   const [currentScreen, setCurrentScreen] = useState(initialState.currentScreen);
 
-  const [questions, setQuestions] = useState(0)
+  const [questions, setQuestions] = useState(quiz[initialState.quizTopic].questions)
 
 
   const selectQuizTopic = (topic) => {

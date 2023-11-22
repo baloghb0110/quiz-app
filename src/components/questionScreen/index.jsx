@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { device } from '../../style/BreakPoints'
 
 import Question from './question/question'
+import QuizHeader from './header'
 
 import { useQuiz } from '../../context/QuizeContext'
 import { ScreenTypes } from '../../types'
@@ -52,37 +53,59 @@ const ButtonWrapper = styled.div`
 const QuestionScreen = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState([])
-  const [showResultModal, setShowResultModal] = useState(false)
+  const [checked, setChecked] = useState(false)
+  const [isCorrect, setIsCorrect] = useState(false)
 
   const {
     questions,
-    quizDetails,
-    result,
     setResult,
     setCurrentScreen,
   } = useQuiz()
 
   const currentQuestion = questions[activeQuestion]
 
-  const { question, type, choices, code, image, correctAnswers } = {
-    question:
-      'Which of the following are JavaScript data types? (Select all that apply)',
-    choices: ['String', 'Number', 'Function', 'Array'],
-    type: 'MCQs',
-    correctAnswers: ['String'],
-    score: 10,
-  }
+  const { question, type, choices, code, image, correctAnswers } = currentQuestion
+
 
   const handleAnswerSelection = (e) => {
+    if(!checked){
     const { name, checked } = e.target
       if (checked) {
         setSelectedAnswer([name])
       }
+    }
   }
+
+  const onClickNext = () => {
+    if (activeQuestion !== questions.length - 1) {
+      setActiveQuestion((prev) => prev + 1)
+      setChecked(false)
+    } 
+    setSelectedAnswer([])
+  }
+
+  const onClickCheck = () => {
+    const isMatch =
+    selectedAnswer.length === correctAnswers.length &&
+    selectedAnswer.every((answer) => correctAnswers.includes(answer))
+
+    setChecked(true)
+
+    if(isMatch){
+      setIsCorrect(true)
+    }else{
+      setIsCorrect(false)
+    }
+  }
+
 
   return (
     <PageCenter>
-      <QuizContainer selectedanswer={selectedAnswer.length > 0}>
+      <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
+        { checked && <QuizHeader
+          answer={selectedAnswer}
+          goodanswer={correctAnswers}
+        />}
         <Question
             question={question}
             code={code}
@@ -90,8 +113,26 @@ const QuestionScreen = () => {
             choices={choices}
             type={type}
             handleAnswerSelection={handleAnswerSelection}
-            selectedanswer={selectedAnswer}
+            selectedAnswer={selectedAnswer}
           />
+
+        <ButtonWrapper>
+          {checked ?           
+            <Button
+              text={'Next'}
+              onClick={onClickNext}
+              disabled={selectedAnswer.length === 0}
+            /> 
+            : 
+            <Button
+            text={'Check'}
+            onClick={onClickCheck}
+            disabled={selectedAnswer.length === 0}
+          />
+          
+          }
+
+        </ButtonWrapper>
       </QuizContainer>
     </PageCenter>
   )

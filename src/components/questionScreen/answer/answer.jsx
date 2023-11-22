@@ -45,14 +45,14 @@ const Answer = ({ onChange, index, choice, type, selectedAnswer }) => {
   const label = String.fromCharCode(65 + index)
 
   return (
-    <AnswerStyle key={index}>
+    <AnswerStyle key={index} highlightAnswer={selectedAnswer.includes(choice)}>
       <AnswerLabel>
         <ChoiceLabel>{label}.</ChoiceLabel>
         <input
           name={choice}
           // radio is for checked one option and checkbox is for checked multiple options
           type={type === 'MAQs' ? 'checkbox' : 'radio'}
-          checked={selectedAnswer && selectedAnswer.includes(choice)}
+          checked={selectedAnswer.includes(choice)}
           onChange={onChange}
         />
         {choice}

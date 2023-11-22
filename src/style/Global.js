@@ -113,3 +113,8 @@ export const ResizableBox = styled.div`
   width: ${(props) =>
     typeof props.width === 'string' ? props.width : `${props.width}px`};
 `;
+
+export const HighlightedText = styled.span`
+  color: ${({ themeText, theme }) =>
+    themeText ? theme.colors.themeText : theme.colors.themeColor};
+`
