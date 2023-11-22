@@ -109,28 +109,6 @@ export const CenterCardContainer = styled.div`
   }
 `;
 
-export const HighlightedText = styled.span`
-  color: ${({ themeText, theme }) =>
-    themeText ? theme.colors.themeText : theme.colors.themeColor};
-`;
-
-export const LogoContainer = styled.div`
-  text-align: center;
-  margin-bottom: 50px;
-  @media ${device.md} {
-    margin-bottom: 30px;
-  }
-  svg {
-    width: 220px;
-    rect {
-      stroke: ${({ theme }) => theme.colors.appLogo};
-    }
-    path {
-      fill: ${({ theme }) => theme.colors.appLogo};
-    }
-  }
-`;
-
 export const ResizableBox = styled.div`
   width: ${(props) =>
     typeof props.width === 'string' ? props.width : `${props.width}px`};

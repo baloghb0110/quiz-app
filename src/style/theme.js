@@ -4,15 +4,15 @@ export const themes = {
       primaryText: '#FFFFFF', // question text color
       secondaryText: '#FFFFFF', // answer text color
       themeText: '#FFFFFF',
-      themeColor: '#C000C0',
-      themeGradient: 'linear-gradient(90deg, #0e050e 0%, #281e20 100%)',
-      background: 'linear-gradient(90deg, #0e050e 0%, #281e20 100%)',
-      cardBackground: '#241a1a',
-      selectTopicBg: '#21191C',
+      themeColor: '#0070c0',
+      //themeGradient: 'linear-gradient(90deg, #0e050e 0%, #281e20 100%)',
+      //background: 'linear-gradient(90deg, #0e050e 0%, #281e20 100%)',
+      cardBackground: '#191919',
+      selectTopicBg: '#393939',
       appLogo: '#FFFFFF',
-      buttonText: '#000000',
+      buttonText: '#c8c8c8',
       outlineButtonText: '#ffffff',
-      buttonBackground: 'linear-gradient(90.04deg, #800080 0.03%, #FFC0CB 99.96%)',
+      buttonBackground: '#2d2b2b',
       selectedAnswer: '#151113',
       infoText: '#FF783F', // skip tag text
       infoBackground: '#ffb23f26', // skip tag background
