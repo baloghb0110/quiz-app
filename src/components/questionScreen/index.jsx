@@ -53,46 +53,36 @@ const ButtonWrapper = styled.div`
 const QuestionScreen = () => {
   const [activeQuestion, setActiveQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState([])
-  const [checked, setChecked] = useState(false)
+  const [checkedd, setChecked] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
 
   const {
     questions,
-    setResult,
-    setCurrentScreen,
+    restartQuiz
   } = useQuiz()
 
-  const shuffleQuestions = (questionArray) =>{
-    for(let i = questionArray.length -1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i - 1))
-      const temp = questionArray[i];
-      questionArray[i] = questionArray[j];
-      questionArray[j] = temp;
-    }
-
-    return questionArray
-  }
-  const shuffeledQuestions = shuffleQuestions(questions)
-
-  const currentQuestion = shuffeledQuestions[activeQuestion]
+  const currentQuestion = questions[activeQuestion]
 
   const { question, type, choices, code, image, correctAnswers } = currentQuestion
 
 
   const handleAnswerSelection = (e) => {
-    if(!checked){
-    const { name, checked } = e.target
-      if (checked) {
-        setSelectedAnswer([name])
-      }
+    if(!checkedd){
+      const { name, checked } = e.target
+        if (checked) {
+          setSelectedAnswer([name])
+        }
     }
   }
 
   const onClickNext = () => {
+    setChecked(false)
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1)
-      setChecked(false)
-    } 
+    }else{
+      setActiveQuestion(0)
+      restartQuiz()
+    }
     setSelectedAnswer([])
   }
 
@@ -114,7 +104,7 @@ const QuestionScreen = () => {
   return (
     <PageCenter>
       <QuizContainer selectedAnswer={selectedAnswer.length > 0}>
-        { checked && <QuizHeader
+        { checkedd && <QuizHeader
           answer={selectedAnswer}
           goodanswer={correctAnswers}
         />}
@@ -129,7 +119,7 @@ const QuestionScreen = () => {
           />
 
         <ButtonWrapper>
-          {checked ?           
+          {checkedd ?           
             <Button
               text={'Next'}
               onClick={onClickNext}

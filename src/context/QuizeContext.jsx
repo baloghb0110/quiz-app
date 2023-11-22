@@ -7,8 +7,6 @@ const initialState = {
   selectQuizTopic: () => { },
   questions: [],
   setQuestions: () => { },
-  result: [],
-  setResult: () => { },
   quizDetails: {
     totalQuestions: 0,
     totalScore: 0,

@@ -12,7 +12,6 @@ const QuizProvider = ({ children }) => {
   };
 
   const [quizTopic, setQuizTopic] = useState(initialState.quizTopic);
-  const [result, setResult] = useState(initialState.result);
   const [currentScreen, setCurrentScreen] = useState(initialState.currentScreen);
 
   const [questions, setQuestions] = useState(quiz[initialState.quizTopic].questions)
@@ -30,6 +29,23 @@ const QuizProvider = ({ children }) => {
     selectedQuizTopic: quizTopic,
   };
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+  
+
+  const restartQuiz = () =>{
+    setQuestions(quiz[initialState.quizTopic].questions)
+    const shuffeledArray = shuffleArray(questions.map(item => item))
+    setQuestions(shuffeledArray)
+  }
+
   const quizContextValue = {
     currentScreen,
     setCurrentScreen,
@@ -37,10 +53,10 @@ const QuizProvider = ({ children }) => {
     selectQuizTopic,
     questions,
     setQuestions,
-    result,
-    setResult,
     quizDetails,
+    restartQuiz,
   }
+
 
   return (
     <QuizContext.Provider value={quizContextValue}>
