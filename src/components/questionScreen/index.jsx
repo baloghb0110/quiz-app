@@ -62,7 +62,19 @@ const QuestionScreen = () => {
     setCurrentScreen,
   } = useQuiz()
 
-  const currentQuestion = questions[activeQuestion]
+  const shuffleQuestions = (questionArray) =>{
+    for(let i = questionArray.length -1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i - 1))
+      const temp = questionArray[i];
+      questionArray[i] = questionArray[j];
+      questionArray[j] = temp;
+    }
+
+    return questionArray
+  }
+  const shuffeledQuestions = shuffleQuestions(questions)
+
+  const currentQuestion = shuffeledQuestions[activeQuestion]
 
   const { question, type, choices, code, image, correctAnswers } = currentQuestion
 
