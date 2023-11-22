@@ -41,7 +41,7 @@ const QuizProvider = ({ children }) => {
   
 
   const restartQuiz = () =>{
-    setQuestions(quiz[initialState.quizTopic].questions)
+    console.log("restart")
     const shuffeledArray = shuffleArray(questions.map(item => item))
     setQuestions(shuffeledArray)
   }

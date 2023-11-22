@@ -1,5 +1,5 @@
-import { javascript } from './javascript'
+import { Word } from './javascript'
 
 export const quiz = {
-  Word: javascript,
+  Word: Word,
 }
